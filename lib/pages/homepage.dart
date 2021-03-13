@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
-            new MyDivider();
+           Navigator.push(BuildContext)
           },
         ),
         centerTitle: true,
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: new MyDivider(),
+      
     );
   }
 }
