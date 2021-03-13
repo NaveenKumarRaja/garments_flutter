@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/my_divider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -15,9 +14,7 @@ class _HomePageState extends State<HomePage> {
       appBar: new AppBar(
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {
-           Navigator.push(BuildContext)
-          },
+          onPressed: () {},
         ),
         centerTitle: true,
         title: Text('GARMENTS'),
@@ -28,7 +25,6 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      
     );
   }
 }
