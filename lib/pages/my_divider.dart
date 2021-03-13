@@ -10,16 +10,31 @@ class MyDivider extends StatefulWidget {
 class _MyDividerState extends State<MyDivider> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Row(
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.people),
-            onPressed: () {},
+    return Drawer(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: ListView(
+            children: <Widget>[
+              ListTile(
+                title: Text('Item1'),
+              )
+            ],
           ),
-        ],
+        ),
       ),
     );
+
+    /*child: new ListView(children: <Widget>[
+          new ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => new HomePage()));
+            },
+          ),
+        ]));*/
   }
 }
