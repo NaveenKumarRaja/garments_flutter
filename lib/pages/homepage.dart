@@ -15,39 +15,45 @@ class _HomePageState extends State<HomePage> {
       primary: true,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("garments"),
-        automaticallyImplyLeading: false,
-        actions: [
+        title: Text(
+          'Garments',
+          style: TextStyle(color: Colors.white),
+        ),
+        flexibleSpace: Container(
+          decoration: new BoxDecoration(
+            gradient: new LinearGradient(
+                colors: [
+                  const Color(0xFF3366FF),
+                  const Color(0xFF00CCFF),
+                ],
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(1.0, 0.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp),
+          ),
+        ),
+        leading: GestureDetector(
+          child: IconButton(
+            icon: Icon(Icons.menu),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => new HomePage()));
+            },
+          ),
+        ),
+        actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
+            color: Colors.white,
             onPressed: () {},
-          )
+          ),
         ],
       ),
       body: Scaffold(
         drawer: MyDivider(),
       ),
     );
-  }
-}
-
-class CenterMenu extends StatefulWidget {
-  CenterMenu({Key key}) : super(key: key);
-
-  @override
-  _CenterMenuState createState() => _CenterMenuState();
-}
-
-class _CenterMenuState extends State<CenterMenu> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: IconButton(
-      onPressed: () {},
-      color: Colors.orangeAccent,
-      icon: Icon(Icons.star),
-      disabledColor: Colors.grey,
-      highlightColor: Colors.black38,
-    ));
   }
 }
