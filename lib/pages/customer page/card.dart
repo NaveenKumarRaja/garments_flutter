@@ -11,18 +11,21 @@ class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
+        child: SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
+          ListTile(
             title: Text('and'),
             subtitle: Text('9845787460'),
             trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {},
           ),
           ListTile(
             title: Text('kij'),
             subtitle: Text('987644354'),
             trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {},
           ),
           ListTile(
             title: Text('Arun'),
@@ -33,6 +36,7 @@ class _CardWidgetState extends State<CardWidget> {
             title: Text('Kg'),
             subtitle: Text('987578746'),
             trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {},
           ),
           ListTile(
             title: Text('Navi'),
@@ -43,9 +47,10 @@ class _CardWidgetState extends State<CardWidget> {
             title: Text('Kumar'),
             subtitle: Text('994578746'),
             trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {},
           ),
         ],
       ),
-    );
+    ));
   }
 }
