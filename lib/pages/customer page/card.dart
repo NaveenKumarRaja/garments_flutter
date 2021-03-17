@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'customerhome.dart';
+import 'customerlist.dart';
+
 class CardWidget extends StatefulWidget {
   CardWidget({Key key}) : super(key: key);
 
@@ -10,47 +13,33 @@ class CardWidget extends StatefulWidget {
 class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            title: Text('and'),
-            subtitle: Text('9845787460'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('kij'),
-            subtitle: Text('987644354'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Arun'),
-            subtitle: Text('984508746'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-          ),
-          ListTile(
-            title: Text('Kg'),
-            subtitle: Text('987578746'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Navi'),
-            subtitle: Text('984878746'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-          ),
-          ListTile(
-            title: Text('Kumar'),
-            subtitle: Text('994578746'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-        ],
-      ),
-    ));
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: Customer.getCustomers().length,
+          itemBuilder: (context, index) {
+            return Container(
+              child: ListTile(
+                  leading: CircleAvatar(radius: 20),
+                  title: Text(
+                    Customer.getCustomers().elementAt(index).name,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    Customer.customers[index].phoneNumber,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {},
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new CustomerHomeWidget()));
+                    },
+                  )),
+            );
+          }),
+    );
   }
 }

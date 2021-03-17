@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'customerhome.dart';
 import 'customerlist.dart';
 
 class Forms extends StatelessWidget {
@@ -43,9 +44,13 @@ class _FormsWidgetState extends State<FormsWidget> {
               "Add customer",
               style: TextStyle(fontSize: 25, color: Colors.black54),
             )),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: name,
               decoration: InputDecoration(
+                  border: OutlineInputBorder(),
                   icon: Icon(Icons.person),
                   hintText: 'Enter your name',
                   labelText: 'Name'),
@@ -59,12 +64,17 @@ class _FormsWidgetState extends State<FormsWidget> {
                 customer.name = value;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: phoneNumber,
               decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   icon: const Icon(Icons.phone),
                   hintText: 'Enter your phone number',
                   labelText: 'Phone'),
+              inputFormatters: [],
               keyboardType: TextInputType.phone,
               validator: (value) {
                 if (value.isEmpty) {
@@ -76,9 +86,13 @@ class _FormsWidgetState extends State<FormsWidget> {
                 customer.phoneNumber = value;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: address,
               decoration: const InputDecoration(
+                  border: OutlineInputBorder(gapPadding: 20),
                   icon: const Icon(Icons.location_on),
                   hintText: 'Enter Address',
                   labelText: 'Address'),
@@ -92,14 +106,27 @@ class _FormsWidgetState extends State<FormsWidget> {
                 customer.address = value;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0),
               child: RaisedButton(
                 onPressed: () {
+                  Customer customer = new Customer();
+                  customer.name = name.text;
+                  customer.phoneNumber = phoneNumber.text;
+                  customer.address = address.text;
+
+                  Customer.addCustomer(customer);
+
                   if (!_formKey.currentState.validate()) {
                     return;
                   }
-
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new CustomerHomeWidget()));
                   showDialog(
                     context: context,
                     child: AlertDialog(
