@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/homepage.dart';
+
+import 'pages/homepage/homepage.dart';
 
 void main() {
   runApp(MaterialApp(

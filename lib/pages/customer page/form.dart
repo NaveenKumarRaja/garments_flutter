@@ -13,7 +13,9 @@ class Forms extends StatelessWidget {
           title: Text('   '),
         ),
         body: Center(
-          child: new FormsWidget(),
+          child: new Container(
+            child: new FormsWidget(),
+          ),
         ));
   }
 }

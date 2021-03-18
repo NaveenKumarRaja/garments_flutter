@@ -1,12 +1,9 @@
-import 'customerhome.dart';
-
 class Customer {
   static List<Customer> customers = customerStub;
   String name;
   String phoneNumber;
   String address;
 
-  static CustomerHomeWidget customer;
   static String searchString;
 
   static get customerStub {
@@ -22,7 +19,7 @@ class Customer {
     customers.add(customer);
   }
 
-  void removeCustomer(Customer customer) {
+  static void removeCustomer(Customer customer) {
     customers.remove(customer);
   }
 

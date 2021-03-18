@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/homepage/homepage.dart';
+import 'package:garments/pages/my_divider.dart';
 
 import 'card.dart';
 import 'form.dart';
@@ -11,12 +13,16 @@ class CustomerHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDivider(),
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.home),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => new HomePage()));
+            },
           )
         ],
       ),
@@ -37,7 +43,7 @@ class CustomerHomeWidget extends StatelessWidget {
         ),
       ]),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
               new MaterialPageRoute(builder: (context) => new Forms()));
