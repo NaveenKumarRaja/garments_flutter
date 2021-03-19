@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customer%20page/customerhome.dart';
 
 import 'customerlist.dart';
 
@@ -10,12 +11,6 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  @override
-  void initState() {
-    super.initState();
-    Customer();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,55 +32,41 @@ class _CardWidgetState extends State<CardWidget> {
               trailing: IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
-                    showAlertDialog(context);
-                    /*setState(() {
-                      Customer.customers.removeAt(index);
-                    });*/
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder: (context, setState) {
+                            return AlertDialog(
+                              title:
+                                  Text("would you like to delete the customer"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text("No"),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      Customer.customers.removeAt(index);
+                                    });
+                                    Navigator.push(
+                                        context,
+                                        new MaterialPageRoute(
+                                            builder: (context) =>
+                                                new CustomerHomeWidget()));
+                                  },
+                                  child: Text("Yes"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    );
                   }),
             ));
           }),
     );
   }
-}
-
-showAlertDialog(BuildContext context) {
-  // set up the buttons
-  /*Widget yesButton = FlatButton(
-    child: Text("Yes"),
-    onPressed: () {
-      
-      
-    },
-  );
-  Widget noButton = FlatButton(
-    child: Text("No"),
-    onPressed: () {},
-  );*/
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("AlertDialog"),
-    content: Text(
-        "Would you like to delete the customer details from the CUSTOMER PAGE"),
-    actions: [
-      FlatButton(
-        child: Text("Yes"),
-        onPressed: () {
-          // Customer.customers.removeAt(context);
-        },
-      ),
-      FlatButton(
-        child: Text("No"),
-        onPressed: () {},
-      )
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
