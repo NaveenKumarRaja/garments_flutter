@@ -113,7 +113,7 @@ class _FormsWidgetState extends State<FormsWidget> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
-              child: RaisedButton(
+              child: TextButton(
                 onPressed: () {
                   Customer customer = new Customer();
                   customer.name = name.text;
