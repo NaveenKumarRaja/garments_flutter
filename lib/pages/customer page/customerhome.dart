@@ -15,6 +15,12 @@ class CustomerHomeWidget extends StatelessWidget {
     return Scaffold(
       drawer: MyDivider(),
       appBar: AppBar(
+        centerTitle: true,
+        title: Text("Customers Page",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25)),
         actions: [
           IconButton(
             icon: Icon(Icons.home),
@@ -27,16 +33,6 @@ class CustomerHomeWidget extends StatelessWidget {
         ],
       ),
       body: new Column(children: <Widget>[
-        new Container(
-          child: Text("Customers Page",
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Open sans',
-                  fontSize: 30)),
-          alignment: Alignment.topCenter,
-          padding: EdgeInsets.all(10.0),
-        ),
         new SearchWidget(),
         Expanded(
           child: CardWidget(),

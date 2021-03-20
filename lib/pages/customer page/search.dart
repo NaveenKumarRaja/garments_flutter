@@ -27,7 +27,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 decoration: new InputDecoration(
                     hintText: 'Search', border: InputBorder.none),
                 onSubmitted: (t) {
-                  Customer.searchString = toString();
+                  Customer.searchString = t;
                   Navigator.push(
                       context,
                       new MaterialPageRoute(
