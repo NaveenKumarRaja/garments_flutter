@@ -30,41 +30,42 @@ class _CardWidgetState extends State<CardWidget> {
               ),
               onTap: () {},
               trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return StatefulBuilder(
-                          builder: (context, setState) {
-                            return AlertDialog(
-                              title:
-                                  Text("would you like to delete the customer"),
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text("No"),
-                                ),
-                                FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      Customer.customers.removeAt(index);
-                                    });
-                                    Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) =>
-                                                new CustomerHomeWidget()));
-                                  },
-                                  child: Text("Yes"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    );
-                  }),
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          return AlertDialog(
+                            title:
+                                Text("would you like to delete the customer"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("No"),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Customer.customers.removeAt(index);
+                                  });
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              new CustomerHomeWidget()));
+                                },
+                                child: Text("Yes"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ));
           }),
     );
