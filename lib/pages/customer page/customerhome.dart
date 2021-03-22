@@ -16,7 +16,7 @@ class CustomerHomeWidget extends StatelessWidget {
       drawer: MyDivider(),
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Customers Page",
+        title: Text("Customers ",
             style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
