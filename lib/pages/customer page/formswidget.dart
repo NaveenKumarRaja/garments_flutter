@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:garments/save%20and%20get/controller.dart';
+import 'package:garments/save and get/get_customers.dart';
+import 'package:garments/save%20and%20get/saved_details.dart';
 import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
+
 import 'customerhome.dart';
 import 'customerlist.dart';
 
@@ -14,7 +18,9 @@ class FormsWidget extends StatefulWidget {
 class _FormsWidgetState extends State<FormsWidget> {
   final _formKey = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
-  Customer customer = new Customer();
+
+  List<CustomerList> customer = List<CustomerList>();
+  //Customer customer = new Customer();
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
@@ -23,19 +29,18 @@ class _FormsWidgetState extends State<FormsWidget> {
 
   void _submitForm() {
     if (_formKey.currentState.validate()) {
-      SavedDetails savedDetails = SavedDetails(
+      CustomersForm customersForm = CustomersForm(
           name.text, phoneNumber.text, phoneNo.text, address.text, city.text);
-
       FormController formController = FormController((String response) {
         print(response);
-        if (response == FormController.STATUS_SUCCESS) {
-          _showSnackBar("Form Submiited");
+        if (response == null) {
+          _showSnackBar("CustomersForm Submitted");
         } else {
           _showSnackBar("Error Occured");
         }
       });
-      _showSnackBar("Submitting Form");
-      formController.submitForm(savedDetails);
+      _showSnackBar("Submiiting Customer");
+      formController.submitForm(customersForm);
     }
   }
 
@@ -44,6 +49,36 @@ class _FormsWidgetState extends State<FormsWidget> {
       content: Text(message),
     );
     _scafoldKey.currentState.showSnackBar(snackBar);
+  }
+
+  getCustomerListFromSheet() async {
+    var list = await http.get(
+        "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec");
+
+    var jsonCustomer = convert.jsonDecode(list.body);
+    print('this is json Customer $jsonCustomer');
+
+    jsonCustomer.forEach((element) {
+      print('$element THIS IS NEXT>>>>>>>>');
+      CustomerList customerList = new CustomerList();
+      customerList.name = element['name'];
+      customerList.phoneNumber = element['phoneNumber'];
+      customerList.phoneNo = element['phoneNo'];
+      customerList.address = element['address'];
+      customerList.city = element['city'];
+      customer.add(customerList);
+
+      print('customer length: ${customer.length}');
+    });
+    //customer = jsonCustomer.map((json) => CustomerList.fromJson(json));
+
+    //print('${customer[0]}');
+  }
+
+  @override
+  void initState() {
+    getCustomerListFromSheet();
+    super.initState();
   }
 
   @override
@@ -83,12 +118,13 @@ class _FormsWidgetState extends State<FormsWidget> {
                 validator: (String value) {
                   if (value.isEmpty) {
                     return 'Please enter name';
+                  } else {
+                    return null;
                   }
-                  return null;
                 },
-                onSaved: (String value) {
+                /*onSaved: (String value) {
                   customer.name = value;
-                },
+                },*/
               ),
               SizedBox(
                 height: 30,
@@ -115,9 +151,9 @@ class _FormsWidgetState extends State<FormsWidget> {
                   }
                   return null;
                 },
-                onSaved: (String value) {
+                /* onSaved: (String value) {
                   customer.phoneNumber = value;
-                },
+                },*/
               ),
               SizedBox(
                 height: 11,
@@ -144,9 +180,9 @@ class _FormsWidgetState extends State<FormsWidget> {
                   }
                   return null;
                 },
-                onSaved: (String value) {
+                /* onSaved: (String value) {
                   customer.phoneNo = value;
-                },
+                },*/
               ),
               SizedBox(
                 height: 12,
@@ -164,9 +200,9 @@ class _FormsWidgetState extends State<FormsWidget> {
                   }
                   return null;
                 },
-                onSaved: (String value) {
+                /*onSaved: (String value) {
                   customer.address = value;
-                },
+                },*/
               ),
               SizedBox(
                 height: 35,
@@ -184,9 +220,9 @@ class _FormsWidgetState extends State<FormsWidget> {
                   }
                   return null;
                 },
-                onSaved: (String value) {
+                /* onSaved: (String value) {
                   customer.city = value;
-                },
+                },*/
               ),
               SizedBox(
                 height: 20,
@@ -202,11 +238,11 @@ class _FormsWidgetState extends State<FormsWidget> {
                       customer.address = address.text;
                       customer.city = city.text;
 
-                      _submitForm();
-                      /*  if (!_formKey.currentState.validate()) {
+                      if (!_formKey.currentState.validate()) {
                         return;
                       }
-                      _formKey.currentState.save();*/
+                      _formKey.currentState.save();
+                      _submitForm();
 
                       Customer.addCustomer(customer);
 
@@ -230,42 +266,5 @@ class _FormsWidgetState extends State<FormsWidget> {
             ],
           )),
     );
-  }
-}
-
-class SavedDetails {
-  String name;
-  String phoneNumber;
-  String phoneNo;
-  String address;
-  String city;
-
-  SavedDetails(
-      this.name, this.phoneNumber, this.phoneNo, this.address, this.city);
-
-  String toParams() =>
-      "?name =$name&phoneNumber =$phoneNumber&phoneNo =$phoneNo&address =$address&city =$city";
-}
-
-class FormController {
-  final void Function(String) callback;
-
-  static const String URL =
-      "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";
-
-  static const STATUS_SUCCESS = "SUCCESS";
-
-  FormController(this.callback);
-
-  get http => null;
-
-  void submitForm(SavedDetails savedDetails) async {
-    try {
-      await http.get(URL + savedDetails.toParams()).then((response) {
-        callback(convert.jsonDecode(response.body)["status"]);
-      });
-    } catch (e) {
-      print(e);
-    }
   }
 }
