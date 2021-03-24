@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:garments/save%20and%20get/controller.dart';
-import 'package:garments/save and get/get_customers.dart';
+//import 'package:garments/save and get/get_customers.dart';
 import 'package:garments/save%20and%20get/saved_details.dart';
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+//import 'dart:convert' as convert;
+//import 'package:http/http.dart' as http;
 
 import 'customerhome.dart';
 import 'customerlist.dart';
@@ -19,8 +19,8 @@ class _FormsWidgetState extends State<FormsWidget> {
   final _formKey = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
 
-  List<CustomerList> customer = List<CustomerList>();
-  //Customer customer = new Customer();
+  //List<CustomerList> customer = List<CustomerList>();
+  Customer customer = new Customer();
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
@@ -49,36 +49,6 @@ class _FormsWidgetState extends State<FormsWidget> {
       content: Text(message),
     );
     _scafoldKey.currentState.showSnackBar(snackBar);
-  }
-
-  getCustomerListFromSheet() async {
-    var list = await http.get(
-        "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec");
-
-    var jsonCustomer = convert.jsonDecode(list.body);
-    print('this is json Customer $jsonCustomer');
-
-    jsonCustomer.forEach((element) {
-      print('$element THIS IS NEXT>>>>>>>>');
-      CustomerList customerList = new CustomerList();
-      customerList.name = element['name'];
-      customerList.phoneNumber = element['phoneNumber'];
-      customerList.phoneNo = element['phoneNo'];
-      customerList.address = element['address'];
-      customerList.city = element['city'];
-      customer.add(customerList);
-
-      print('customer length: ${customer.length}');
-    });
-    //customer = jsonCustomer.map((json) => CustomerList.fromJson(json));
-
-    //print('${customer[0]}');
-  }
-
-  @override
-  void initState() {
-    getCustomerListFromSheet();
-    super.initState();
   }
 
   @override

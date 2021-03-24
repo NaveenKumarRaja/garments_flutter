@@ -57,54 +57,6 @@ class Customer {
     customer6.address = "usha Theatre";
     customer6.city = "67,second street,Neru Nagar";
     customers.add(customer6);
-
-    Customer customer7 = new Customer();
-    customer7.name = "Anand";
-    customer7.phoneNumber = "8889762336";
-    customer7.phoneNo = "9887765412";
-    customer7.address = "Dharapuram";
-    customer7.city = "67,second street,Metu Nagar";
-    customers.add(customer7);
-
-    Customer customer8 = new Customer();
-    customer8.name = "Kathir";
-    customer8.phoneNumber = "8364785766";
-    customer8.phoneNo = "7766732344";
-    customer8.address = "Palladam";
-    customer8.city = "67,second street,Neru Nagar";
-    customers.add(customer8);
-
-    Customer customer9 = new Customer();
-    customer9.name = "Anbu";
-    customer9.phoneNumber = "8758507669";
-    customer9.phoneNo = "999958869";
-    customer9.address = "NP GoldCity";
-    customer9.city = "67, First street,Neru Nagar";
-    customers.add(customer9);
-
-    Customer customer10 = new Customer();
-    customer10.name = "Sivam";
-    customer10.phoneNumber = "8004849366";
-    customer10.phoneNo = "6745837833";
-    customer10.address = "Rakiyapalayam";
-    customer10.city = "67,Third street,Neru Nagar";
-    customers.add(customer10);
-
-    Customer customer11 = new Customer();
-    customer11.name = "Vetri";
-    customer11.phoneNumber = "8333585766";
-    customer11.phoneNo = "999968869";
-    customer11.address = "CTC";
-    customer11.city = "67,second street,Nallur";
-    customers.add(customer11);
-
-    Customer customer12 = new Customer();
-    customer12.name = "Vel";
-    customer12.phoneNumber = "8883143392";
-    customer12.phoneNo = "898498984";
-    customer12.address = "15, Velampalyam";
-    customer12.city = "1-146, kK nagar,Chennai";
-    customers.add(customer12);
     return customers;
   }
 

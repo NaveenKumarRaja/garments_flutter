@@ -44,4 +44,14 @@ class CustomersForm {
   );
   String toParams() =>
       "?name=$name&phoneNumber=$phoneNumber&phoneNo=$phoneNo&address=$address&city=$city";
+
+  factory CustomersForm.fromJson(dynamic json) {
+    return CustomersForm(
+      "${json['name']}",
+      "${json['phoneNumber']}",
+      "${json['phoneNo']}",
+      "${json['address']}",
+      "${json['city']}",
+    );
+  }
 }
