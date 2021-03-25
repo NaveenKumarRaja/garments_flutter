@@ -17,11 +17,7 @@ class FormController {
       await http.post(URL + customersForm.toParams()).then((response) {
         callback(convert.jsonDecode(response.body)["status"]);
       });
-
-      print(URL + customersForm.toParams());
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
   // static const String UR =
   //   "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";
@@ -29,7 +25,7 @@ class FormController {
   Future<List<CustomersForm>> getCustomersList() async {
     return await http.get(URL).then((response) {
       var jsonCustomer = convert.jsonDecode(response.body);
-      print(jsonCustomer);
+      // print(jsonCustomer);
       jsonCustomer = jsonCustomer as List;
       return jsonCustomer
           .map<CustomersForm>((json) => CustomersForm.fromJson(json))

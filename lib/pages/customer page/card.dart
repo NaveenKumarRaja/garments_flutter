@@ -4,6 +4,7 @@ import 'package:garments/save%20and%20get/controller.dart';
 import 'package:garments/save and get/controller.dart';
 import 'package:garments/save%20and%20get/saved_details.dart';
 import 'customerhome.dart';
+import 'customerlist.dart';
 
 class CardWidget extends StatefulWidget {
   const CardWidget({Key key}) : super(key: key);
@@ -68,7 +69,7 @@ class _CardWidgetState extends State<CardWidget> {
                                 onPressed: () {
                                   setState(() {
                                     customer.removeAt(index);
-                                    // Customer.customers.removeAt(index);
+                                    Customer.customers.removeAt(index);
                                   });
                                   Navigator.push(
                                       context,
