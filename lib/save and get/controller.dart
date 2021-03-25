@@ -1,5 +1,3 @@
-//import 'package:garments/save%20and%20get/get_customers.dart';
-
 import 'dart:async';
 
 import 'saved_details.dart';
@@ -16,12 +14,14 @@ class FormController {
 
   void submitForm(CustomersForm customersForm) async {
     try {
-      await http.get(URL + customersForm.toParams()).then((response) {
+      await http.post(URL + customersForm.toParams()).then((response) {
         callback(convert.jsonDecode(response.body)["status"]);
       });
 
       print(URL + customersForm.toParams());
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
   // static const String UR =
   //   "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:garments/save%20and%20get/controller.dart';
 //import 'package:garments/save and get/get_customers.dart';
@@ -27,6 +29,8 @@ class _FormsWidgetState extends State<FormsWidget> {
   TextEditingController address = TextEditingController();
   TextEditingController city = TextEditingController();
 
+  get response => null;
+
   void _submitForm() {
     if (_formKey.currentState.validate()) {
       CustomersForm customersForm = CustomersForm(
@@ -42,6 +46,11 @@ class _FormsWidgetState extends State<FormsWidget> {
       _showSnackBar("Submiiting Customer");
       formController.submitForm(customersForm);
     }
+    setState(() {
+      String jsonsDataString = response.toString();
+      customer = jsonDecode(jsonsDataString);
+      print(customer.toString());
+    });
   }
 
   _showSnackBar(String message) {
