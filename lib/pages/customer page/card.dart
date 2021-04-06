@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:garments/save%20and%20get/controller.dart';
+import 'package:garments/pages/Details%20page/detailspage.dart';
 import 'package:garments/save and get/controller.dart';
 import 'package:garments/save%20and%20get/saved_details.dart';
+//import 'package:http/http.dart';
+//import 'package:http/http.dart';
 import 'customerhome.dart';
-import 'customerlist.dart';
+//import 'customerlist.dart';
 
 class CardWidget extends StatefulWidget {
   const CardWidget({Key key}) : super(key: key);
@@ -37,7 +39,6 @@ class _CardWidgetState extends State<CardWidget> {
           itemBuilder: (context, index) {
             return Container(
                 child: ListTile(
-              leading: CircleAvatar(radius: 20),
               title: Text(
                 customer[index].name,
                 //Customer.getCustomers().elementAt(index).name,
@@ -45,10 +46,15 @@ class _CardWidgetState extends State<CardWidget> {
               ),
               subtitle: Text(
                 customer[index].phoneNumber,
-                //Customer.customers[index].phoneNumber,
+                // Customer.customers[index].phoneNumber,
                 style: TextStyle(fontSize: 20),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new DetailsPage()));
+              },
               trailing: IconButton(
                 icon: Icon(Icons.delete),
                 onPressed: () {
@@ -69,7 +75,6 @@ class _CardWidgetState extends State<CardWidget> {
                                 onPressed: () {
                                   setState(() {
                                     customer.removeAt(index);
-                                    Customer.customers.removeAt(index);
                                   });
                                   Navigator.push(
                                       context,

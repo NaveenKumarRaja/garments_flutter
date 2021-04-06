@@ -1,5 +1,6 @@
 class CustomersForm {
   static List<CustomersForm> customers = customerStub;
+
   String name;
   String phoneNumber;
   String phoneNo;
@@ -43,15 +44,10 @@ class CustomersForm {
     this.city,
   );
   String toParams() =>
-      "?name=$name&phoneNumber=$phoneNumber&phoneNo=$phoneNo&address=$address&city=$city";
+      "?&name=$name&phoneNumber=$phoneNumber&phoneNo=$phoneNo&address=$address&city=$city";
 
   factory CustomersForm.fromJson(dynamic json) {
-    return CustomersForm(
-      "${json['name']}",
-      "${json['phoneNumber']}",
-      "${json['phoneNo']}",
-      "${json['address']}",
-      "${json['city']}",
-    );
+    return CustomersForm("${json['name']}", "${json['phoneNumber']}",
+        "${json['phoneNo']}", "${json['address']}", "${json['city']}");
   }
 }

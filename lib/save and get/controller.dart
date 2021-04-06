@@ -1,4 +1,5 @@
-import 'dart:async';
+//import 'package:flutter/material.dart';
+//import 'package:garments/pages/customer%20page/customerlist.dart';
 
 import 'saved_details.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,9 @@ class FormController {
       await http.post(URL + customersForm.toParams()).then((response) {
         callback(convert.jsonDecode(response.body)["status"]);
       });
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
   // static const String UR =
   //   "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";
@@ -28,7 +31,9 @@ class FormController {
       // print(jsonCustomer);
       jsonCustomer = jsonCustomer as List;
       return jsonCustomer
-          .map<CustomersForm>((json) => CustomersForm.fromJson(json))
+          .map<CustomersForm>(
+            (json) => CustomersForm.fromJson(json),
+          )
           .toList();
     });
   }

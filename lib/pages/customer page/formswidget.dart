@@ -23,6 +23,7 @@ class _FormsWidgetState extends State<FormsWidget> {
 
   //List<CustomerList> customer = List<CustomerList>();
   Customer customer = new Customer();
+  TextEditingController sNo = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
@@ -34,7 +35,12 @@ class _FormsWidgetState extends State<FormsWidget> {
   void _submitForm() {
     if (_formKey.currentState.validate()) {
       CustomersForm customersForm = CustomersForm(
-          name.text, phoneNumber.text, phoneNo.text, address.text, city.text);
+        name.text,
+        phoneNumber.text,
+        phoneNo.text,
+        address.text,
+        city.text,
+      );
       FormController formController = FormController((String response) {
         print(response);
         if (response == null) {
@@ -43,7 +49,7 @@ class _FormsWidgetState extends State<FormsWidget> {
           _showSnackBar("Error Occured");
         }
       });
-      _showSnackBar("Submiiting Customer");
+      _showSnackBar("Submiting Customer");
       formController.submitForm(customersForm);
     }
     setState(() {
@@ -141,7 +147,7 @@ class _FormsWidgetState extends State<FormsWidget> {
                 controller: phoneNo,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.phone),
+                    icon: const Icon(Icons.phone_in_talk),
                     hintText: 'Enter your another phone number',
                     labelText: 'Phone 2'),
                 maxLength: 10,
@@ -217,18 +223,17 @@ class _FormsWidgetState extends State<FormsWidget> {
                       customer.address = address.text;
                       customer.city = city.text;
 
-                      if (!_formKey.currentState.validate()) {
-                        return;
-                      }
+                      if (!_formKey.currentState.validate()) {}
                       _formKey.currentState.save();
-                      _submitForm();
 
-                      Customer.addCustomer(customer);
+                      _submitForm();
 
                       Navigator.push(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new CustomerHomeWidget()));
+
+                      // Customer.addCustomer(customer);
                       showDialog(
                         context: context,
                         child: AlertDialog(
