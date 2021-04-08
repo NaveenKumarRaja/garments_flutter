@@ -35,7 +35,9 @@ class CustomerHomeWidget extends StatelessWidget {
       body: new Column(children: <Widget>[
         new SearchWidget(),
         Expanded(
-          child: CardWidget(),
+          child: CardWidget(
+            customer: [],
+          ),
         ),
       ]),
       floatingActionButton: FloatingActionButton(

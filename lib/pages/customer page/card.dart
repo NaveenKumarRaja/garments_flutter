@@ -9,7 +9,8 @@ import 'customerhome.dart';
 //import 'customerlist.dart';
 
 class CardWidget extends StatefulWidget {
-  const CardWidget({Key key}) : super(key: key);
+  final List<CustomersForm> customer;
+  const CardWidget({Key key, @required this.customer}) : super(key: key);
 
   @override
   _CardWidgetState createState() => _CardWidgetState();
@@ -22,6 +23,7 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   void initState() {
+    customer = List<CustomersForm>();
     super.initState();
 
     FormController(this.callback).getCustomersList().then((customer) {
@@ -36,8 +38,8 @@ class _CardWidgetState extends State<CardWidget> {
     return Scaffold(
       body: ListView.builder(
           itemCount: customer.length,
-          itemBuilder: (context, index) {
-            return Container(
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
                 child: ListTile(
               title: Text(
                 customer[index].name,
@@ -53,7 +55,9 @@ class _CardWidgetState extends State<CardWidget> {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => new DetailsPage()));
+                      builder: (context) => new DetailsPage(),
+                      settings: RouteSettings(arguments: customer[index]),
+                    ));
               },
               trailing: IconButton(
                 icon: Icon(Icons.delete),

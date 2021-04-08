@@ -10,6 +10,13 @@ class CardDetail extends StatefulWidget {
 class _CardDetailState extends State<CardDetail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+      height: 300,
+      width: double.maxFinite,
+      child: Card(
+        elevation: 5,
+      ),
+    );
   }
 }
