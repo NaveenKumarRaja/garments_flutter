@@ -41,7 +41,11 @@ class _DetailsPageState extends State<DetailsPage> {
           )
         ],
       ),
-      body: new CardDetail(),
+      body: new Column(
+        children: [
+          new CardDetail(),
+        ],
+      ),
     );
   }
 }
