@@ -36,7 +36,9 @@ class _DetailsPageState extends State<DetailsPage> {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (context) => new EditDetails()));
+                    builder: (context) => new EditDetails(),
+                    settings: RouteSettings(arguments: customer),
+                  ));
             },
           )
         ],

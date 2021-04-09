@@ -10,23 +10,30 @@ class EditDetails extends StatefulWidget {
 }
 
 class _EditDetailsState extends State<EditDetails> {
+  List<CustomersForm> customer = List<CustomersForm>();
   TextEditingController sNo = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController city = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final CustomersForm customer = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
+        //title: Text(customer.name),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => new DetailsPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsPage(),
+                  settings: RouteSettings(arguments: customer),
+                ));
           },
         ),
       ),
@@ -51,9 +58,6 @@ class _EditDetailsState extends State<EditDetails> {
                 return null;
               }
             },
-            /*onSaved: (String value) {
-                  customer.name = value;
-                },*/
           ),
           SizedBox(
             height: 30,
@@ -80,9 +84,6 @@ class _EditDetailsState extends State<EditDetails> {
               }
               return null;
             },
-            /* onSaved: (String value) {
-                  customer.phoneNumber = value;
-                },*/
           ),
           SizedBox(
             height: 11,
@@ -109,9 +110,6 @@ class _EditDetailsState extends State<EditDetails> {
               }
               return null;
             },
-            /* onSaved: (String value) {
-                  customer.phoneNo = value;
-                },*/
           ),
           SizedBox(
             height: 12,
@@ -129,9 +127,6 @@ class _EditDetailsState extends State<EditDetails> {
               }
               return null;
             },
-            /*onSaved: (String value) {
-                  customer.address = value;
-                },*/
           ),
           SizedBox(
             height: 35,
@@ -149,9 +144,6 @@ class _EditDetailsState extends State<EditDetails> {
               }
               return null;
             },
-            /* onSaved: (String value) {
-                  customer.city = value;
-                },*/
           ),
           SizedBox(
             height: 20,
@@ -174,11 +166,14 @@ class _EditDetailsState extends State<EditDetails> {
                       ),
                       FlatButton(
                         onPressed: () {
-                          setState(() {});
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => new EditDetails()));
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                  builder: (context) => DetailsPage(),
+                                  settings: RouteSettings(arguments: customer),
+                                ));
+                          });
                         },
                         child: Text("Yes"),
                       ),

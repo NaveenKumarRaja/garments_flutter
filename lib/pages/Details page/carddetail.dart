@@ -21,7 +21,7 @@ class _CardDetailState extends State<CardDetail> {
         elevation: 5,
         child: Padding(
           padding: EdgeInsets.all(8),
-          child: Stack(
+          child: Column(
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(left: 10, top: 5),
@@ -29,16 +29,15 @@ class _CardDetailState extends State<CardDetail> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.phone,
-                          size: 18,
+                        IconButton(
+                          icon: Icon(
+                            Icons.phone,
+                            size: 18,
+                          ),
+                          onPressed: () {},
                         ),
                         SizedBox(
                           width: 10,
-                        ),
-                        Text(
-                          'Phone Number 1:' + '    ',
-                          style: TextStyle(fontSize: 15),
                         ),
                         Text(
                           customer.phoneNumber,
@@ -47,21 +46,17 @@ class _CardDetailState extends State<CardDetail> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.phone,
-                          size: 18,
+                        IconButton(
+                          icon: Icon(
+                            Icons.phone,
+                            size: 18,
+                          ),
+                          onPressed: () {},
                         ),
                         SizedBox(
                           width: 10,
-                        ),
-                        Text(
-                          'Phone Number 2:' + '    ',
-                          style: TextStyle(fontSize: 15),
                         ),
                         Text(
                           customer.phoneNo,
@@ -71,20 +66,19 @@ class _CardDetailState extends State<CardDetail> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 8,
                     ),
                     Row(
                       children: <Widget>[
+                        SizedBox(
+                          width: 15,
+                        ),
                         Icon(
                           Icons.location_on,
                           size: 18,
                         ),
                         SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Address                :' + '    ',
-                          style: TextStyle(fontSize: 15),
+                          width: 20,
                         ),
                         Text(
                           customer.address,
@@ -98,16 +92,15 @@ class _CardDetailState extends State<CardDetail> {
                     ),
                     Row(
                       children: <Widget>[
+                        SizedBox(
+                          width: 15,
+                        ),
                         Icon(
                           Icons.location_city,
                           size: 18,
                         ),
                         SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'City                        :' + '    ',
-                          style: TextStyle(fontSize: 15),
+                          width: 20,
                         ),
                         Text(
                           customer.city,
