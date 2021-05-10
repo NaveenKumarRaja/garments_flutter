@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:garments/save%20and%20get/controller.dart';
-//import 'package:garments/save and get/get_customers.dart';
 import 'package:garments/save%20and%20get/saved_details.dart';
-//import 'dart:convert' as convert;
-//import 'package:http/http.dart' as http;
 
 import 'customerhome.dart';
 import 'customerlist.dart';
@@ -46,6 +43,7 @@ class _FormsWidgetState extends State<FormsWidget> {
       _showSnackBar("Submiiting Customer");
       formController.submitForm(customersForm);
     }
+
     setState(() {
       String jsonsDataString = response.toString();
       customer = jsonDecode(jsonsDataString);
