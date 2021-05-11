@@ -2,9 +2,9 @@
 //import 'package:garments/pages/customer%20page/customerlist.dart';
 //import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:garments/pages/customer%20page/customerhome.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter/widgets.dart';
+//import 'package:garments/pages/customer%20page/customerhome.dart';
 
 import 'saved_details.dart';
 //import 'package:http/http.dart' as http;
@@ -47,6 +47,7 @@ class FormController {
     }).catchError((e) => {
               //print("error : " + e.toString())
             });
+
     /*try {
       await http.post(URL + customersForm.toParams()).then((response) {
         callback(convert.jsonDecode(response.body)["status"]);
@@ -73,5 +74,16 @@ class FormController {
       return Future.value(
           customers); //jsonCustomer.map<CustomersForm>((json) => CustomersForm).toList();
     });
+  }
+
+  void _updateForm(CustomersForm customersForm) async {
+    final gsheets = GSheets(_credentials);
+    final ss = await gsheets
+        .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
+
+    var sheet = ss.worksheetByTitle("Customers");
+    final cellsRow = await sheet.cells.row(2);
+    cellsRow.forEach((cell) => cell.value = '_${cell.value}');
+    await sheet.cells.insert(cellsRow);
   }
 }
