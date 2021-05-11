@@ -33,10 +33,10 @@ class _CardWidgetState extends State<CardWidget> {
     });
   }
 
+  void deleteCustomer() {}
+
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
           itemCount: customer.length,
@@ -79,9 +79,7 @@ class _CardWidgetState extends State<CardWidget> {
                               ),
                               FlatButton(
                                 onPressed: () {
-                                  setState(() {
-                                    customer.removeAt(index);
-                                  });
+                                  deleteCustomer();
                                   Navigator.push(
                                       context,
                                       new MaterialPageRoute(
