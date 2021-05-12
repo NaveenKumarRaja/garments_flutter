@@ -47,14 +47,6 @@ class FormController {
     }).catchError((e) => {
               //print("error : " + e.toString())
             });
-
-    /*try {
-      await http.post(URL + customersForm.toParams()).then((response) {
-        callback(convert.jsonDecode(response.body)["status"]);
-      });
-    } catch (e) {
-      print(e);
-    }*/
   }
   // static const String UR =
   //   "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";
@@ -67,23 +59,43 @@ class FormController {
     var sheet = ss.worksheetByTitle("Customers");
 
     return await sheet.values.allRows(fromRow: 2).then((response) {
+      print(response);
       List<CustomersForm> customers = response
-          .map((listOfstr) => new CustomersForm(listOfstr[0], listOfstr[1],
-              listOfstr[2], listOfstr[3], listOfstr[4]))
+          .map((listOfstr) => new CustomersForm(
+              listOfstr[0],
+              listOfstr[1],
+              listOfstr[2],
+              listOfstr[3],
+              listOfstr[4],
+              CustomersForm.parseIsDeleted(listOfstr[5])))
+          .where((customer) => !customer.isDeleted)
           .toList();
       return Future.value(
           customers); //jsonCustomer.map<CustomersForm>((json) => CustomersForm).toList();
     });
   }
 
-  void _updateForm(CustomersForm customersForm) async {
+  void updateForm(CustomersForm customersForm) async {
     final gsheets = GSheets(_credentials);
     final ss = await gsheets
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
 
     var sheet = ss.worksheetByTitle("Customers");
-    final cellsRow = await sheet.cells.row(2);
-    cellsRow.forEach((cell) => cell.value = '_${cell.value}');
-    await sheet.cells.insert(cellsRow);
+    print("customerForm :" + customersForm.toGsheetsList(false).toString());
+    await sheet.values
+        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(false))
+        .then((response) => print("Response : " + response.toString()));
+  }
+
+  void deleteCustomer(CustomersForm customersForm) async {
+    final gsheets = GSheets(_credentials);
+    final ss = await gsheets
+        .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
+
+    var sheet = ss.worksheetByTitle("Customers");
+    print("customerForm :" + customersForm.toGsheetsList(true).toString());
+
+    await sheet.values
+        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(true));
   }
 }

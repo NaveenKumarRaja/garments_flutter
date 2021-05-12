@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:garments/Customer%20Editngs/controller.dart';
+import 'package:garments/Customer%20Editngs/saved_details.dart';
 import 'package:garments/pages/Details%20page/detailspage.dart';
-import 'package:garments/save and get/controller.dart';
-import 'package:garments/save%20and%20get/saved_details.dart';
 //import 'package:http/http.dart';
 //import 'package:http/http.dart';
 import 'customerhome.dart';
@@ -33,7 +33,12 @@ class _CardWidgetState extends State<CardWidget> {
     });
   }
 
-  void deleteCustomer() {}
+  void deleteCustomer(CustomersForm customersForm) {
+    FormController formController = FormController((String response) {
+      print(response);
+    });
+    formController.deleteCustomer(customersForm);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +84,7 @@ class _CardWidgetState extends State<CardWidget> {
                               ),
                               FlatButton(
                                 onPressed: () {
-                                  deleteCustomer();
+                                  deleteCustomer(customer[index]);
                                   Navigator.push(
                                       context,
                                       new MaterialPageRoute(

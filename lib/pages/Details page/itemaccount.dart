@@ -27,20 +27,20 @@ class _ItemAccountState extends State<ItemAccount> {
               NavigationRailDestination(
                 icon: Icon(Icons.shopping_cart_sharp),
                 selectedIcon: Icon(Icons.shopping_cart),
-                label: Text('First'),
+                label: Text('Items'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.account_balance),
                 selectedIcon: Icon(Icons.account_balance_outlined),
-                label: Text('Second'),
+                label: Text('Accounts'),
               ),
             ],
           ),
-          const VerticalDivider(thickness: 1, width: 1),
+          const VerticalDivider(thickness: 1, width: 2),
           // This is the main content.
           Expanded(
             child: Center(
-              child: Text('selectedIndex: $_selectedIndex'),
+              child: Text("eee"),
             ),
           )
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/ItemsPage/itemshome.dart';
 import 'package:garments/pages/customer%20page/customerhome.dart';
 
 import 'homepage/homepage.dart';
@@ -61,7 +62,7 @@ class _MyDividerState extends State<MyDivider> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => new HomePage()));
+                            builder: (context) => new ItemsHome()));
                   },
                 ),
                 ListTile(

@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:garments/Customer%20Editngs/controller.dart';
+import 'package:garments/Customer%20Editngs/saved_details.dart';
 import 'package:garments/pages/Details%20page/detailspage.dart';
-import 'package:garments/pages/customer%20page/customerlist.dart';
-import 'package:garments/save%20and%20get/controller.dart';
-import 'package:garments/save%20and%20get/saved_details.dart';
 
 class EditDetails extends StatefulWidget {
   EditDetails({Key key}) : super(key: key);
@@ -14,44 +13,42 @@ class EditDetails extends StatefulWidget {
 }
 
 class _EditDetailsState extends State<EditDetails> {
-  final _form = GlobalKey<FormState>();
+  //final _form = GlobalKey<FormState>();
   final _scafold = GlobalKey<ScaffoldState>();
 
   List<CustomersForm> customer = List<CustomersForm>();
 
-  TextEditingController sNo = TextEditingController();
-  TextEditingController name;
-  TextEditingController phoneNumber;
-  TextEditingController phoneNo;
-  TextEditingController address;
-  TextEditingController city;
+  TextEditingController name = new TextEditingController();
+  TextEditingController phoneNumber = new TextEditingController();
+  TextEditingController phoneNo = new TextEditingController();
+  TextEditingController address = new TextEditingController();
+  TextEditingController city = new TextEditingController();
 
   get response => null;
-  @override
+  //@override
   void initState() {
     super.initState();
-    name = new TextEditingController();
-    phoneNumber = new TextEditingController();
+    /*phoneNumber = new TextEditingController();
     phoneNo = new TextEditingController();
     address = new TextEditingController();
-    city = new TextEditingController();
+    city = new TextEditingController();*/
   }
 
-  void _submitForm() {
-    if (_form.currentState.validate()) {
-      CustomersForm customersForm = CustomersForm(
-          name.text, phoneNumber.text, phoneNo.text, address.text, city.text);
-      FormController formController = FormController((String response) {
-        print(response);
-        if (response == null) {
-          _showSnackBar("CustomersForm Submitted");
-        } else {
-          _showSnackBar("Error Occured");
-        }
-      });
-      _showSnackBar("Submiiting Customer");
-      formController.submitForm(customersForm);
-    }
+  void _updateForm() {
+    CustomersForm customersForm = CustomersForm(name.text, phoneNumber.text,
+        phoneNo.text, address.text, city.text, false);
+    print("Customer : " + customersForm.toParams());
+    FormController formController = FormController((String response) {
+      print(response);
+      if (response == null) {
+        _showSnackBar("CustomersForm Submitted");
+      } else {
+        _showSnackBar("Error Occured");
+      }
+    });
+    _showSnackBar("Update Customer");
+    formController.updateForm(customersForm);
+
     setState(() {
       String jsonsDataString = response.toString();
       customer = jsonDecode(jsonsDataString);
@@ -69,6 +66,11 @@ class _EditDetailsState extends State<EditDetails> {
   @override
   Widget build(BuildContext context) {
     final CustomersForm customer = ModalRoute.of(context).settings.arguments;
+    name.text = customer.name;
+    phoneNo.text = customer.phoneNo;
+    phoneNumber.text = customer.phoneNumber;
+    address.text = customer.address;
+    city.text = customer.city;
 
     return Scaffold(
       key: _scafold,
@@ -100,15 +102,17 @@ class _EditDetailsState extends State<EditDetails> {
                 icon: Icon(Icons.person),
                 hintText: 'Enter your name',
                 labelText: 'Name'),
-            onChanged: (String value) {
-              name = value as TextEditingController;
-            },
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Please enter name';
               } else {
                 return null;
               }
+            },
+            onChanged: (String value) {
+              print("Name : " + value);
+              name.text = value;
+              print("Name : " + name.text);
             },
           ),
           SizedBox(
@@ -125,7 +129,7 @@ class _EditDetailsState extends State<EditDetails> {
             inputFormatters: [],
             keyboardType: TextInputType.phone,
             onChanged: (String value) {
-              phoneNumber = value as TextEditingController;
+              phoneNumber.text = value;
             },
             validator: (String value) {
               String patttern = r'^(?:[6-9])?[0-9]{10,12}$';
@@ -154,7 +158,7 @@ class _EditDetailsState extends State<EditDetails> {
             inputFormatters: [],
             keyboardType: TextInputType.phone,
             onChanged: (String value) {
-              phoneNo = value as TextEditingController;
+              phoneNo.text = value;
             },
             validator: (String value) {
               String patttern = r'^(?:[6-9])?[0-9]{10,12}$';
@@ -180,7 +184,7 @@ class _EditDetailsState extends State<EditDetails> {
                 hintText: 'Enter Address',
                 labelText: 'Address'),
             onChanged: (String value) {
-              address = value as TextEditingController;
+              address.text = value;
             },
             validator: (String value) {
               if (value.isEmpty) {
@@ -200,7 +204,7 @@ class _EditDetailsState extends State<EditDetails> {
                 hintText: 'Enter City',
                 labelText: 'City'),
             onChanged: (String value) {
-              city = value as TextEditingController;
+              city.text = value;
             },
             validator: (String value) {
               if (value.isEmpty) {
@@ -223,18 +227,15 @@ class _EditDetailsState extends State<EditDetails> {
                 builder: (context, setState) {
                   return AlertDialog(
                     title: Text("Are you sure to change the customer details"),
-                    actions: <Widget>[
+                    actions: [
                       FlatButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text("No"),
                       ),
                       FlatButton(
                         onPressed: () {
-                          if (!_form.currentState.validate()) {
-                            return;
-                          }
-                          _form.currentState.save();
-                          _submitForm();
+                          _updateForm();
+                          setState(() {});
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
