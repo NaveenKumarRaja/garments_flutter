@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garments/Customer%20Editngs/saved_details.dart';
+
+import 'package:garments/pages/customers/api/Service.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
