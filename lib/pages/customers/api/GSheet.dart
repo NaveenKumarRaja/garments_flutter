@@ -1,15 +1,6 @@
-//import 'package:flutter/material.dart';
-//import 'package:garments/pages/customer%20page/customerlist.dart';
-//import 'dart:convert';
-
-//import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
-//import 'package:garments/pages/customer%20page/customerhome.dart';
-
-import 'saved_details.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:convert' as convert;
 import 'package:gsheets/gsheets.dart';
+
+import 'Service.dart';
 
 class FormController {
   final void Function(String) callback;
@@ -39,17 +30,11 @@ class FormController {
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
 
     var sheet = ss.worksheetByTitle("Customers");
-    //print("before post " + customersForm.toGsheets().toString());
     await sheet.values.map
         .appendRow(customersForm.toGsheets())
-        .then((response) {
-      //print("response : " + response.toString());
-    }).catchError((e) => {
-              //print("error : " + e.toString())
-            });
+        .then((response) {})
+        .catchError((e) => {});
   }
-  // static const String UR =
-  //   "https://script.google.com/macros/s/AKfycbyDPfD5aMVQprFvgKKD8inVa2DxiH6Ni-JcGxNye8F2ToP0OdgA/exec";
 
   Future<List<CustomersForm>> getCustomersList() async {
     final gsheets = GSheets(_credentials);
@@ -70,8 +55,7 @@ class FormController {
               CustomersForm.parseIsDeleted(listOfstr[5])))
           .where((customer) => !customer.isDeleted)
           .toList();
-      return Future.value(
-          customers); //jsonCustomer.map<CustomersForm>((json) => CustomersForm).toList();
+      return Future.value(customers);
     });
   }
 

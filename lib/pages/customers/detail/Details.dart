@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:garments/Customer%20Editngs/saved_details.dart';
-import 'package:garments/pages/Details%20page/carddetail.dart';
-import 'package:garments/pages/Details%20page/itemaccount.dart';
-import 'package:garments/pages/customer%20page/customerhome.dart';
-import 'editdetail.dart';
+import 'package:garments/pages/customers/Edit/edit.dart';
+import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/customers/api/Service.dart';
+
+import 'Carddetail.dart';
+import 'RailNavigate.dart';
 
 class DetailsPage extends StatefulWidget {
   DetailsPage({Key key}) : super(key: key);

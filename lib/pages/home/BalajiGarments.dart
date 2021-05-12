@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/my_divider.dart';
+import 'package:garments/pages/home/Drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);

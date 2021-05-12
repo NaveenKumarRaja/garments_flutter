@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/homepage/homepage.dart';
-import 'package:garments/pages/my_divider.dart';
-
+import 'package:garments/pages/customers/create/Create.dart';
+import 'package:garments/pages/home/BalajiGarments.dart';
+import 'package:garments/pages/home/Drawer.dart';
 import 'card.dart';
-import 'form.dart';
 import 'search.dart';
 
 class CustomerHomeWidget extends StatelessWidget {
@@ -44,7 +43,7 @@ class CustomerHomeWidget extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
-              new MaterialPageRoute(builder: (context) => new Forms()));
+              new MaterialPageRoute(builder: (context) => new FormsWidget()));
         },
       ),
     );

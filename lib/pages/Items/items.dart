@@ -14,6 +14,10 @@ class _ItemsPageState extends State<ItemsPage> {
         body: Card(
       child: ListTile(
         title: Text("Item Name"),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {},
+        ),
       ),
     ));
   }

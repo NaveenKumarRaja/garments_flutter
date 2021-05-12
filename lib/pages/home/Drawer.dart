@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/ItemsPage/itemshome.dart';
-import 'package:garments/pages/customer%20page/customerhome.dart';
-
-import 'homepage/homepage.dart';
+import 'package:garments/pages/Items/itemshome.dart';
+import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/home/BalajiGarments.dart';
 
 class MyDivider extends StatefulWidget {
   MyDivider({Key key, Container drawer}) : super(key: key);

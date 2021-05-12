@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:garments/Customer%20Editngs/controller.dart';
-import 'package:garments/Customer%20Editngs/saved_details.dart';
-import 'package:garments/pages/Details%20page/detailspage.dart';
-//import 'package:http/http.dart';
-//import 'package:http/http.dart';
-import 'customerhome.dart';
-//import 'customerlist.dart';
+import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/customers/detail/Details.dart';
 
 class CardWidget extends StatefulWidget {
   final List<CustomersForm> customer;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/homepage/homepage.dart';
+import 'pages/home/balajiGarments.dart';
 
 void main() {
   runApp(MaterialApp(

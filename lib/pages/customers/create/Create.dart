@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:garments/Customer%20Editngs/controller.dart';
-import 'package:garments/Customer%20Editngs/saved_details.dart';
-
-import 'customerhome.dart';
-import 'customerlist.dart';
+import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/customers/api/GSheet.dart';
+import 'package:garments/pages/customers/api/Service.dart';
 
 class FormsWidget extends StatefulWidget {
   FormsWidget({Key key}) : super(key: key);
@@ -19,7 +15,6 @@ class _FormsWidgetState extends State<FormsWidget> {
   final _scafoldKey = GlobalKey<ScaffoldState>();
 
   //List<CustomerList> customer = List<CustomerList>();
-  Customer customer = new Customer();
   TextEditingController name = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
@@ -43,12 +38,6 @@ class _FormsWidgetState extends State<FormsWidget> {
       _showSnackBar("Submiiting Customer");
       formController.submitForm(customersForm);
     }
-
-    setState(() {
-      String jsonsDataString = response.toString();
-      customer = jsonDecode(jsonsDataString);
-      print(customer.toString());
-    });
   }
 
   _showSnackBar(String message) {
@@ -208,20 +197,11 @@ class _FormsWidgetState extends State<FormsWidget> {
                 padding: EdgeInsets.symmetric(vertical: 50, horizontal: 110),
                 child: new RaisedButton(
                     onPressed: () {
-                      Customer customer = new Customer();
-                      customer.name = name.text;
-                      customer.phoneNumber = phoneNumber.text;
-                      customer.phoneNo = phoneNo.text;
-                      customer.address = address.text;
-                      customer.city = city.text;
-
                       if (!_formKey.currentState.validate()) {
                         return;
                       }
                       _formKey.currentState.save();
                       _submitForm();
-
-                      Customer.addCustomer(customer);
 
                       Navigator.push(
                           context,

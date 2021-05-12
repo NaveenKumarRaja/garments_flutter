@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'customerhome.dart';
-import 'customerlist.dart';
+import 'package:garments/pages/customers/Listall/List.dart';
 
 class SearchWidget extends StatefulWidget {
   SearchWidget({Key key}) : super(key: key);
@@ -27,7 +25,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                 decoration: new InputDecoration(
                     hintText: 'Search', border: InputBorder.none),
                 onSubmitted: (t) {
-                  Customer.searchString = t;
                   Navigator.push(
                       context,
                       new MaterialPageRoute(
@@ -38,7 +35,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                 icon: new Icon(Icons.cancel),
                 onPressed: () {
                   searchBox.clear();
-                  Customer.searchString = null;
                   Navigator.push(
                       context,
                       new MaterialPageRoute(

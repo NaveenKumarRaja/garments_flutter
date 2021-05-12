@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/homepage/homepage.dart';
-import 'package:garments/pages/my_divider.dart';
+import 'package:garments/pages/Items/items.dart';
+import 'package:garments/pages/home/BalajiGarments.dart';
+import 'package:garments/pages/home/Drawer.dart';
 
 class ItemsHome extends StatelessWidget {
   const ItemsHome({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class ItemsHome extends StatelessWidget {
                 fontSize: 25)),
         actions: [
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.add),
             color: Colors.white,
             onPressed: () {
               Navigator.push(context,
@@ -28,7 +29,7 @@ class ItemsHome extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text("items"),
+        child: ItemsPage(),
       ),
     );
   }
