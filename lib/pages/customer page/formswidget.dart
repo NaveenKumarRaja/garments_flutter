@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:garments/save%20and%20get/controller.dart';
-import 'package:garments/save%20and%20get/saved_details.dart';
+import 'package:garments/Customer%20Editngs/controller.dart';
+import 'package:garments/Customer%20Editngs/saved_details.dart';
 
 import 'customerhome.dart';
 import 'customerlist.dart';
@@ -30,8 +30,8 @@ class _FormsWidgetState extends State<FormsWidget> {
 
   void _submitForm() {
     if (_formKey.currentState.validate()) {
-      CustomersForm customersForm = CustomersForm(
-          name.text, phoneNumber.text, phoneNo.text, address.text, city.text);
+      CustomersForm customersForm = CustomersForm(name.text, phoneNumber.text,
+          phoneNo.text, address.text, city.text, false);
       FormController formController = FormController((String response) {
         print(response);
         if (response == null) {

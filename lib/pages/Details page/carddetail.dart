@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garments/save%20and%20get/saved_details.dart';
+import 'package:garments/Customer%20Editngs/saved_details.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
@@ -19,6 +19,7 @@ class _CardDetailState extends State<CardDetail> {
       width: double.maxFinite,
       child: Card(
         elevation: 5,
+        color: Colors.white,
         child: Padding(
           padding: EdgeInsets.all(8),
           child: Column(
@@ -30,10 +31,7 @@ class _CardDetailState extends State<CardDetail> {
                     Row(
                       children: <Widget>[
                         IconButton(
-                          icon: Icon(
-                            Icons.phone,
-                            size: 18,
-                          ),
+                          icon: Icon(Icons.phone, size: 18, color: Colors.blue),
                           onPressed: () {},
                         ),
                         SizedBox(
@@ -43,26 +41,17 @@ class _CardDetailState extends State<CardDetail> {
                           customer.phoneNumber,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.phone,
-                            size: 18,
-                          ),
-                          onPressed: () {},
                         ),
-                        SizedBox(
-                          width: 10,
+                        Text(
+                          " ,  ",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           customer.phoneNo,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -83,7 +72,7 @@ class _CardDetailState extends State<CardDetail> {
                         Text(
                           customer.address,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.normal),
                         )
                       ],
                     ),
@@ -105,7 +94,7 @@ class _CardDetailState extends State<CardDetail> {
                         Text(
                           customer.city,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.normal),
                         )
                       ],
                     )
