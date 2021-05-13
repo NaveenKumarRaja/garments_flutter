@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
 import 'package:garments/pages/customers/api/Service.dart';
@@ -34,9 +33,9 @@ class _EditDetailsState extends State<EditDetails> {
   }
 
   void _updateForm() {
-    CustomersForm customersForm = CustomersForm(name.text, phoneNumber.text,
+    CustomersForm updateCustomer = CustomersForm(name.text, phoneNumber.text,
         phoneNo.text, address.text, city.text, false);
-    print("Customer : " + customersForm.toParams());
+    print("Customer : " + updateCustomer.toParams());
     FormController formController = FormController((String response) {
       print(response);
       if (response == null) {
@@ -46,13 +45,7 @@ class _EditDetailsState extends State<EditDetails> {
       }
     });
     _showSnackBar("Update Customer");
-    formController.updateForm(customersForm);
-
-    setState(() {
-      String jsonsDataString = response.toString();
-      customer = jsonDecode(jsonsDataString);
-      print(customer.toString());
-    });
+    formController.updateForm(updateCustomer);
   }
 
   _showSnackBar(String message) {

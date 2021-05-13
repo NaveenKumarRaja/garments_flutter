@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/Items/itemshome.dart';
+import 'package:garments/pages/Accounts/Bank.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/home/BalajiGarments.dart';
 
@@ -73,7 +74,7 @@ class _MyDividerState extends State<MyDivider> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => new HomePage()));
+                            builder: (context) => new Account()));
                   },
                 ),
               ],

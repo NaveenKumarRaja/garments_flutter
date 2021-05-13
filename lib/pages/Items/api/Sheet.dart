@@ -1,10 +1,7 @@
+import 'package:garments/pages/Items/api/Service.dart';
 import 'package:gsheets/gsheets.dart';
-import 'dart:async';
 
-import 'Service.dart';
-
-class FormController {
-  final void Function(String) callback;
+class ItemSheet {
   var _credentials = r'''
     {
   "type": "service_account",
@@ -17,67 +14,53 @@ class FormController {
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/balajigarments%40balajigarments.iam.gserviceaccount.com"
-}
+}       
     ''';
 
-  FormController(this.callback);
-
-  void submitForm(CustomersForm customersForm) async {
+  void add(Items addItem) async {
     final gsheets = GSheets(_credentials);
     final ss = await gsheets
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
 
-    var sheet = ss.worksheetByTitle("Customers");
-    await sheet.values.map
-        .appendRow(customersForm.toGsheets())
-        .then((response) {})
-        .catchError((e) => {});
+    var sheet = ss.worksheetByTitle("Items");
+    await sheet.values.map.appendRow(addItem.gSheet());
   }
 
-  Future<List<CustomersForm>> getCustomersList() async {
+  Future<List<Items>> getItems() async {
     final gsheets = GSheets(_credentials);
     final ss = await gsheets
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
 
-    var sheet = ss.worksheetByTitle("Customers");
-
+    var sheet = ss.worksheetByTitle("Items");
     return await sheet.values.allRows(fromRow: 2).then((response) {
-      print(response);
-      List<CustomersForm> customers = response
-          .map((listOfstr) => new CustomersForm(
-              listOfstr[0],
-              listOfstr[1],
-              listOfstr[2],
-              listOfstr[3],
-              listOfstr[4],
-              CustomersForm.parseIsDeleted(listOfstr[5])))
-          .where((customer) => !customer.isDeleted)
+      List<Items> getItem = response
+          .map((itemIndex) =>
+              new Items(itemIndex[0], Items.parseIsDeleted(itemIndex[1])))
+          .where((item) => !item.isDeleted)
           .toList();
-      return Future.value(customers);
+
+      return Future.value(getItem);
     });
   }
 
-  void updateForm(CustomersForm customersForm) async {
+  void update(Items editItem) async {
     final gsheets = GSheets(_credentials);
     final ss = await gsheets
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
+    var sheet = ss.worksheetByTitle("Items");
 
-    var sheet = ss.worksheetByTitle("Customers");
-    print("customerForm :" + customersForm.toGsheetsList(false).toString());
     await sheet.values
-        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(false))
+        .insertRowByKey(editItem.itemName, editItem.toSheetList(false))
         .then((response) => print("Response : " + response.toString()));
   }
 
-  void deleteCustomer(CustomersForm customersForm) async {
+  void deleteItem(Items deleteItems) async {
     final gsheets = GSheets(_credentials);
     final ss = await gsheets
         .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
-
-    var sheet = ss.worksheetByTitle("Customers");
-    print("customerForm :" + customersForm.toGsheetsList(true).toString());
-
+    var sheet = ss.worksheetByTitle("Items");
+    print("Deleted item : " + deleteItems.toSheetList(true).toString());
     await sheet.values
-        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(true));
+        .insertRowByKey(deleteItems.itemName, deleteItems.toSheetList(true));
   }
 }

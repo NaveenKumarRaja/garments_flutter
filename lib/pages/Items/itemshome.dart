@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/Items/items.dart';
-import 'package:garments/pages/home/BalajiGarments.dart';
+import 'package:garments/pages/Items/create/Create.dart';
+import 'package:garments/pages/Items/list/NameCard.dart';
 import 'package:garments/pages/home/Drawer.dart';
 
 class ItemsHome extends StatelessWidget {
@@ -22,8 +22,10 @@ class ItemsHome extends StatelessWidget {
             icon: Icon(Icons.add),
             color: Colors.white,
             onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => new HomePage()));
+              Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new CreateItem()));
             },
           )
         ],

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customers/Listall/Card.dart';
+import 'package:garments/pages/customers/Listall/Search.dart';
 import 'package:garments/pages/customers/create/Create.dart';
 import 'package:garments/pages/home/BalajiGarments.dart';
 import 'package:garments/pages/home/Drawer.dart';
-import 'card.dart';
-import 'search.dart';
+
+import 'Card.dart';
+import 'Search.dart';
 
 class CustomerHomeWidget extends StatelessWidget {
   CustomerHomeWidget({Key key}) : super(key: key);
@@ -34,7 +37,7 @@ class CustomerHomeWidget extends StatelessWidget {
       body: new Column(children: <Widget>[
         new SearchWidget(),
         Expanded(
-          child: CardWidget(
+          child: new CardWidget(
             customer: [],
           ),
         ),

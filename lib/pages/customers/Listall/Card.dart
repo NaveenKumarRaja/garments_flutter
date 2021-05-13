@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/customers/api/GSheet.dart';
+import 'package:garments/pages/customers/api/Service.dart';
 import 'package:garments/pages/customers/detail/Details.dart';
 
 class CardWidget extends StatefulWidget {
@@ -12,44 +14,45 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  List<CustomersForm> customer = List<CustomersForm>();
+  List<CustomersForm> allCustomers = List<CustomersForm>();
 
   void Function(String p1) get callback => null;
 
   @override
   void initState() {
-    customer = List<CustomersForm>();
+    allCustomers = List<CustomersForm>();
     super.initState();
 
-    FormController(this.callback).getCustomersList().then((customer) {
+    FormController(this.callback).getCustomersList().then((customers) {
+      print("customers :" + customers.toString());
       setState(() {
-        this.customer = customer;
+        this.allCustomers = customers;
       });
     });
   }
 
-  void deleteCustomer(CustomersForm customersForm) {
+  void deleteCustomer(CustomersForm delete) {
     FormController formController = FormController((String response) {
       print(response);
     });
-    formController.deleteCustomer(customersForm);
+    formController.deleteCustomer(delete);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemCount: customer.length,
+          itemCount: allCustomers.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
                 child: ListTile(
               title: Text(
-                customer[index].name,
+                allCustomers[index].name,
                 //Customer.getCustomers().elementAt(index).name,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                customer[index].phoneNumber,
+                allCustomers[index].phoneNumber,
                 // Customer.customers[index].phoneNumber,
                 style: TextStyle(fontSize: 20),
               ),
@@ -58,7 +61,7 @@ class _CardWidgetState extends State<CardWidget> {
                     context,
                     new MaterialPageRoute(
                       builder: (context) => new DetailsPage(),
-                      settings: RouteSettings(arguments: customer[index]),
+                      settings: RouteSettings(arguments: allCustomers[index]),
                     ));
               },
               trailing: IconButton(
@@ -79,7 +82,7 @@ class _CardWidgetState extends State<CardWidget> {
                               ),
                               FlatButton(
                                 onPressed: () {
-                                  deleteCustomer(customer[index]);
+                                  deleteCustomer(allCustomers[index]);
                                   Navigator.push(
                                       context,
                                       new MaterialPageRoute(

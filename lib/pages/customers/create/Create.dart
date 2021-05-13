@@ -24,8 +24,8 @@ class _FormsWidgetState extends State<FormsWidget> {
   get response => null;
 
   void _submitForm() {
-    if (_formKey.currentState.validate()) {
-      CustomersForm customersForm = CustomersForm(name.text, phoneNumber.text,
+    {
+      CustomersForm addCustomers = CustomersForm(name.text, phoneNumber.text,
           phoneNo.text, address.text, city.text, false);
       FormController formController = FormController((String response) {
         print(response);
@@ -36,7 +36,7 @@ class _FormsWidgetState extends State<FormsWidget> {
         }
       });
       _showSnackBar("Submiiting Customer");
-      formController.submitForm(customersForm);
+      formController.submitForm(addCustomers);
     }
   }
 
