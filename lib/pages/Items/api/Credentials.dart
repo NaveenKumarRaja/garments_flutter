@@ -1,6 +1,7 @@
 import 'package:gsheets/gsheets.dart';
 
-const _credentials = r'''
+class Credentials {
+  var _credentials = r'''
     {
   "type": "service_account",
   "project_id": "balajigarments",
@@ -15,10 +16,11 @@ const _credentials = r'''
 }       
     ''';
 
-const spreadsheetId = "1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM";
-void main() async {
-  final gsheets = GSheets(_credentials);
-  final ss = await gsheets.spreadsheet(spreadsheetId);
+  void main() async {
+    final gsheets = GSheets(_credentials);
+    final ss = await gsheets
+        .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
 
-  var sheet = ss.worksheetByTitle("Items");
+    var sheet = ss.worksheetByTitle("Items");
+  }
 }

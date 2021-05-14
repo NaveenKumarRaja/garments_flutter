@@ -12,6 +12,7 @@ class ItemsPage extends StatefulWidget {
 
 class _ItemsPageState extends State<ItemsPage> {
   List<Items> allItems = List<Items>();
+  var refresh = GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
@@ -33,24 +34,41 @@ class _ItemsPageState extends State<ItemsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-            itemCount: allItems.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                  child: ListTile(
-                title: Text(allItems[index].itemName),
-                onTap: () {},
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    deleteItems(allItems[index]);
-                    Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new ItemsHome()));
-                  },
-                ),
-              ));
-            }));
+        body: RefreshIndicator(
+      key: refresh,
+      child: ListView.builder(
+          itemCount: allItems.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+                child: ListTile(
+              title: Text(allItems[index].itemName),
+              onTap: () {},
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  deleteItems(allItems[index]);
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new ItemsHome()));
+                },
+              ),
+            ));
+          }),
+      onRefresh: () {
+        refreshlist();
+      },
+    ));
+  }
+
+  Future<Null> refreshlist() async {
+    refresh.currentState?.show(
+        atTop:
+            true); // change atTop to false to show progress indicator at bottom
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new ItemsHome()));
+    });
   }
 }

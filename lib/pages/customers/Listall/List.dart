@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Listall/Card.dart';
 import 'package:garments/pages/customers/Listall/Search.dart';
@@ -36,6 +37,7 @@ class CustomerHomeWidget extends StatelessWidget {
       ),
       body: new Column(children: <Widget>[
         new SearchWidget(),
+        // new Refresh(),
         Expanded(
           child: new CardWidget(
             customer: [],
