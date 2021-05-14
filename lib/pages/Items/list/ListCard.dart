@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/Items/api/Service.dart';
 import 'package:garments/pages/Items/api/Sheet.dart';
 import 'package:garments/pages/Items/itemshome.dart';
+import 'package:garments/pages/Items/model/Service.dart';
 
 class ItemsPage extends StatefulWidget {
   ItemsPage({Key key}) : super(key: key);

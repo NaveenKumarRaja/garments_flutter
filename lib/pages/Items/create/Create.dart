@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/Items/api/Service.dart';
 import 'package:garments/pages/Items/api/Sheet.dart';
 import 'package:garments/pages/Items/itemshome.dart';
+import 'package:garments/pages/Items/model/Service.dart';
 
 class CreateItem extends StatefulWidget {
   CreateItem({Key key}) : super(key: key);
@@ -46,8 +46,8 @@ class _CreateItemState extends State<CreateItem> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       icon: Icon(Icons.shopping_cart),
-                      hintText: "Entersdfewf Item Name",
-                      labelText: "Name")),
+                      hintText: "Enter Item Name",
+                      labelText: "Item Name")),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 50, horizontal: 110),
                 child: new RaisedButton(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Edit/edit.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
-import 'package:garments/pages/customers/api/Service.dart';
+import 'package:garments/pages/customers/modal/Service.dart';
 
 import 'Carddetail.dart';
 import 'RailNavigate.dart';

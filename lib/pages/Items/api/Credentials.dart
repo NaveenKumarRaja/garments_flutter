@@ -1,6 +1,4 @@
-import 'package:garments/pages/customers/modal/Service.dart';
 import 'package:gsheets/gsheets.dart';
-import 'dart:async';
 
 const _credentials = r'''
     {
@@ -14,57 +12,13 @@ const _credentials = r'''
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/balajigarments%40balajigarments.iam.gserviceaccount.com"
-}
+}       
     ''';
 
-class FormController {
-  final GSheets gsheets = GSheets(_credentials);
+const spreadsheetId = "1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM";
+void main() async {
+  final gsheets = GSheets(_credentials);
+  final ss = await gsheets.spreadsheet(spreadsheetId);
 
-  Spreadsheet spreadSheet;
-  Worksheet sheet;
-
-  Future<void> init() async {
-    spreadSheet ??= await gsheets
-        .spreadsheet("1p5dka7tZmt25DWtdIY0zPNC2ZCqAEgdMdzzQWgvXdnM");
-    sheet ??= await spreadSheet.worksheetByTitle('Customers');
-  }
-
-  void submitForm(CustomersForm customersForm) async {
-    await init();
-    await sheet.values.map
-        .appendRow(customersForm.toGsheets())
-        .then((response) {})
-        .catchError((e) => {});
-  }
-
-  Future<List<CustomersForm>> getCustomersList() async {
-    await init();
-    return await sheet.values.allRows(fromRow: 2).then((response) {
-      List<CustomersForm> customers = response
-          .map((listOfstr) => new CustomersForm(
-              listOfstr[0],
-              listOfstr[1],
-              listOfstr[2],
-              listOfstr[3],
-              listOfstr[4],
-              CustomersForm.parseIsDeleted(listOfstr[5])))
-          .where((customer) => !customer.isDeleted)
-          .toList();
-      return Future.value(customers);
-    });
-  }
-
-  void updateForm(CustomersForm customersForm) async {
-    await init();
-    await sheet.values
-        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(false))
-        .then((response) => print("Response : " + response.toString()));
-  }
-
-  void deleteCustomer(CustomersForm customersForm) async {
-    await init();
-
-    await sheet.values
-        .insertRowByKey(customersForm.name, customersForm.toGsheetsList(true));
-  }
+  var sheet = ss.worksheetByTitle("Items");
 }

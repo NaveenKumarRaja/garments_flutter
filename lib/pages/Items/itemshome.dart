@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/Items/create/Create.dart';
-import 'package:garments/pages/Items/list/NameCard.dart';
+import 'package:garments/pages/Items/list/ListCard.dart';
 import 'package:garments/pages/home/Drawer.dart';
 
 class ItemsHome extends StatelessWidget {

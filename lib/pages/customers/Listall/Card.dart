@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/api/Service.dart';
+import 'package:garments/pages/customers/modal/Service.dart';
 import 'package:garments/pages/customers/detail/Details.dart';
 
 class CardWidget extends StatefulWidget {
@@ -16,14 +16,12 @@ class CardWidget extends StatefulWidget {
 class _CardWidgetState extends State<CardWidget> {
   List<CustomersForm> allCustomers = List<CustomersForm>();
 
-  void Function(String p1) get callback => null;
-
   @override
   void initState() {
     allCustomers = List<CustomersForm>();
     super.initState();
 
-    FormController(this.callback).getCustomersList().then((customers) {
+    FormController().getCustomersList().then((customers) {
       print("customers :" + customers.toString());
       setState(() {
         this.allCustomers = customers;
@@ -32,9 +30,7 @@ class _CardWidgetState extends State<CardWidget> {
   }
 
   void deleteCustomer(CustomersForm delete) {
-    FormController formController = FormController((String response) {
-      print(response);
-    });
+    FormController formController = FormController();
     formController.deleteCustomer(delete);
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/api/Service.dart';
+import 'package:garments/pages/customers/modal/Service.dart';
 import 'package:garments/pages/customers/detail/Details.dart';
 
 class EditDetails extends StatefulWidget {
@@ -36,14 +36,7 @@ class _EditDetailsState extends State<EditDetails> {
     CustomersForm updateCustomer = CustomersForm(name.text, phoneNumber.text,
         phoneNo.text, address.text, city.text, false);
     print("Customer : " + updateCustomer.toParams());
-    FormController formController = FormController((String response) {
-      print(response);
-      if (response == null) {
-        _showSnackBar("CustomersForm Submitted");
-      } else {
-        _showSnackBar("Error Occured");
-      }
-    });
+    FormController formController = FormController();
     _showSnackBar("Update Customer");
     formController.updateForm(updateCustomer);
   }

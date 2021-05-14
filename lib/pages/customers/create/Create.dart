@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/api/Service.dart';
+import 'package:garments/pages/customers/modal/Service.dart';
 
 class FormsWidget extends StatefulWidget {
   FormsWidget({Key key}) : super(key: key);
@@ -21,21 +21,12 @@ class _FormsWidgetState extends State<FormsWidget> {
   TextEditingController address = TextEditingController();
   TextEditingController city = TextEditingController();
 
-  get response => null;
-
   void _submitForm() {
     {
       CustomersForm addCustomers = CustomersForm(name.text, phoneNumber.text,
           phoneNo.text, address.text, city.text, false);
-      FormController formController = FormController((String response) {
-        print(response);
-        if (response == null) {
-          _showSnackBar("CustomersForm Submitted");
-        } else {
-          _showSnackBar("Error Occured");
-        }
-      });
-      _showSnackBar("Submiiting Customer");
+      FormController formController = FormController();
+      _showSnackBar("Submiting Customer");
       formController.submitForm(addCustomers);
     }
   }

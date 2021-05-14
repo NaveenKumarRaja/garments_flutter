@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:garments/pages/customers/api/Service.dart';
+import 'package:garments/pages/customers/modal/Service.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
