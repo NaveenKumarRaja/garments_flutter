@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
 import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/customers/detail/Details.dart';
+import 'package:garments/pages/detail/customer/Details.dart';
 
 class CardWidget extends StatefulWidget {
   final List<CustomersForm> customer;

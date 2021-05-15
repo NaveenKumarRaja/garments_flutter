@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
 import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/customers/detail/Details.dart';
+import 'package:garments/pages/detail/customer/Details.dart';
 
 class EditDetails extends StatefulWidget {
   EditDetails({Key key}) : super(key: key);

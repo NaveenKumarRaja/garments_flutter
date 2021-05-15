@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Edit/edit.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/modal/Service.dart';
+import 'package:garments/pages/detail/Tabbar.dart';
 
 import 'Carddetail.dart';
 
@@ -49,6 +50,9 @@ class _DetailsPageState extends State<DetailsPage> {
       body: new Column(
         children: <Widget>[
           new CardDetail(),
+          Expanded(
+            child: new TabbarWidget(),
+          )
         ],
       ),
     );
