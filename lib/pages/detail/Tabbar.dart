@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customer_item/model/CustomerItem.dart';
 import 'package:garments/pages/customer_item/service/CustomerItemService.dart';
 import 'package:garments/pages/customer_item/widgets/CustomerItem.dart';
 
 class TabbarWidget extends StatefulWidget {
-  TabbarWidget({Key key}) : super(key: key);
+  final String customerName;
+  TabbarWidget(this.customerName, {Key key}) : super(key: key);
 
   @override
-  _TabbarWidgetState createState() => _TabbarWidgetState();
+  _TabbarWidgetState createState() => _TabbarWidgetState(customerName);
 }
 
 class _TabbarWidgetState extends State<TabbarWidget>
     with TickerProviderStateMixin {
   TabController _tabController;
+  CustomerItemSerivce customerItemSerivce;
+  List<CustomerItem> customerItems = List.empty();
+  String customerName;
+
+  _TabbarWidgetState(this.customerName);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    this.customerItemSerivce = new CustomerItemSerivce();
+    customerItemSerivce.getCustomerItems(customerName).then((value) {
+      print('setting customer items : ' + value.toString());
+      setState(() {
+        this.customerItems = value;
+      });
+    });
   }
 
   @override
@@ -36,7 +50,7 @@ class _TabbarWidgetState extends State<TabbarWidget>
         body: TabBarView(
           controller: _tabController,
           children: [
-            CustomerItemsWidget(CustomerItemSerivce.getCustomerItems()),
+            CustomerItemsWidget(customerItems),
             Text('Account'),
           ],
         ));

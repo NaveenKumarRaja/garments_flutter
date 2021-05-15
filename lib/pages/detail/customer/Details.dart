@@ -51,7 +51,7 @@ class _DetailsPageState extends State<DetailsPage> {
         children: <Widget>[
           new CardDetail(),
           Expanded(
-            child: new TabbarWidget(),
+            child: new TabbarWidget(customer.name),
           )
         ],
       ),
