@@ -10,29 +10,31 @@ class CustomerItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text(
-            'Item Name',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Rate',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-      ],
-      rows: List<DataRow>.generate(
-          customerItems.length,
-          (int index) => DataRow(
-                cells: <DataCell>[
-                  DataCell(Text(customerItems[index].itemName)),
-                  DataCell(Text(customerItems[index].rate.toString()))
-                ],
-              )),
-    );
+    return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: DataTable(
+          columns: const <DataColumn>[
+            DataColumn(
+              label: Text(
+                'Item Name',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Rate',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+          ],
+          rows: List<DataRow>.generate(
+              customerItems.length,
+              (int index) => DataRow(
+                    cells: <DataCell>[
+                      DataCell(Text(customerItems[index].itemName)),
+                      DataCell(Text(customerItems[index].rate.toString()))
+                    ],
+                  )),
+        ));
   }
 }

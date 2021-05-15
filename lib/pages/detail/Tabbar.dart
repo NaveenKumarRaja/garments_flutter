@@ -47,12 +47,14 @@ class _TabbarWidgetState extends State<TabbarWidget>
             ),
           ],
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            CustomerItemsWidget(customerItems),
-            Text('Account'),
-          ],
+        body: Scrollbar(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              CustomerItemsWidget(customerItems),
+              Text('Account'),
+            ],
+          ),
         ));
   }
 }
