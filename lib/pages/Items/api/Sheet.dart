@@ -1,4 +1,4 @@
-import 'package:garments/pages/Items/model/Service.dart';
+import 'package:garments/pages/Items/model/Item.dart';
 import 'package:gsheets/gsheets.dart';
 
 const _credentials = r'''

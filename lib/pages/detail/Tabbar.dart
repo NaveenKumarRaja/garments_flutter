@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customer_item/service/CustomerItemService.dart';
+import 'package:garments/pages/customer_item/widgets/CustomerItem.dart';
 
 class TabbarWidget extends StatefulWidget {
   TabbarWidget({Key key}) : super(key: key);
@@ -20,17 +22,23 @@ class _TabbarWidgetState extends State<TabbarWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBar(
-        controller: _tabController,
-        tabs: <Widget>[
-          Tab(
-            text: "Items Sale",
-          ),
-          Tab(
-            text: "Bank Account",
-          ),
-        ],
-      ),
-    );
+        appBar: TabBar(
+          controller: _tabController,
+          tabs: <Widget>[
+            Tab(
+              text: "Items",
+            ),
+            Tab(
+              text: "Bank Account",
+            ),
+          ],
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            CustomerItemsWidget(CustomerItemSerivce.getCustomerItems()),
+            Text('Account'),
+          ],
+        ));
   }
 }
