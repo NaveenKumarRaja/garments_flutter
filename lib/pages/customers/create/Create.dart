@@ -199,11 +199,10 @@ class _FormsWidgetState extends State<FormsWidget> {
                           new MaterialPageRoute(
                               builder: (context) => new CustomerHomeWidget()));
                       showDialog(
-                        context: context,
-                        child: AlertDialog(
-                          content: Text('Entered Successfully'),
-                        ),
-                      );
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                content: Text('Entered Successfully'),
+                              ));
                     },
                     child: Text('SUBMIT'),
                     color: Colors.blue,
