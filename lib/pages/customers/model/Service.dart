@@ -1,4 +1,4 @@
-class CustomersForm {
+class Customer {
   String name;
   String phoneNumber;
   String phoneNo;
@@ -8,8 +8,8 @@ class CustomersForm {
 
   static String searchString;
 
-  CustomersForm(this.name, this.phoneNumber, this.phoneNo, this.address,
-      this.city, this.isDeleted);
+  Customer(this.name, this.phoneNumber, this.phoneNo, this.address, this.city,
+      this.isDeleted);
   String toParams() =>
       "?&name=$name&phoneNumber=$phoneNumber&phoneNo=$phoneNo&address=$address&city=$city";
 

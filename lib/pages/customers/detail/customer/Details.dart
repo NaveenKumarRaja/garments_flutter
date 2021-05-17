@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/customers/Edit/edit.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
-import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/detail/Tabbar.dart';
-
+import 'package:garments/pages/customers/detail/Tabbar.dart';
+import 'package:garments/pages/customers/model/Service.dart';
 import 'Carddetail.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -18,7 +16,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CustomersForm customer = ModalRoute.of(context).settings.arguments;
+    final Customer customer = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,21 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
           },
         ),
         centerTitle: true,
-        title: Text(customer.name, style: TextStyle(color: Colors.white)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (context) => new EditDetails(),
-                    settings: RouteSettings(arguments: customer),
-                  ));
-            },
-          )
-        ],
+        title: Text("Details", style: TextStyle(color: Colors.white)),
       ),
       body: new Column(
         children: <Widget>[
@@ -54,6 +38,10 @@ class _DetailsPageState extends State<DetailsPage> {
             child: new TabbarWidget(customer.name),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }

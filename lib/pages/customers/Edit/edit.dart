@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/detail/customer/Details.dart';
+import 'package:garments/pages/customers/model/Service.dart';
+import 'package:garments/pages/customers/detail/customer/Details.dart';
 
 class EditDetails extends StatefulWidget {
   EditDetails({Key key}) : super(key: key);
@@ -14,7 +14,7 @@ class _EditDetailsState extends State<EditDetails> {
   //final _form = GlobalKey<FormState>();
   final _scafold = GlobalKey<ScaffoldState>();
 
-  List<CustomersForm> customer = List<CustomersForm>();
+  List<Customer> customer = List<Customer>();
 
   TextEditingController name = new TextEditingController();
   TextEditingController phoneNumber = new TextEditingController();
@@ -33,12 +33,12 @@ class _EditDetailsState extends State<EditDetails> {
   }
 
   void _updateForm() {
-    CustomersForm updateCustomer = CustomersForm(name.text, phoneNumber.text,
+    Customer updateCustomer = Customer(name.text, phoneNumber.text,
         phoneNo.text, address.text, city.text, false);
     print("Customer : " + updateCustomer.toParams());
-    FormController formController = FormController();
+    CustomerService customerService = CustomerService();
     _showSnackBar("Update Customer");
-    formController.updateForm(updateCustomer);
+    customerService.updateForm(updateCustomer);
   }
 
   _showSnackBar(String message) {
@@ -50,7 +50,7 @@ class _EditDetailsState extends State<EditDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final CustomersForm customer = ModalRoute.of(context).settings.arguments;
+    final Customer customer = ModalRoute.of(context).settings.arguments;
     name.text = customer.name;
     phoneNo.text = customer.phoneNo;
     phoneNumber.text = customer.phoneNumber;

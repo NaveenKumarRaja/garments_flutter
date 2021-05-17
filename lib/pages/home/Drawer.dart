@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/Items/itemshome.dart';
-import 'package:garments/pages/Accounts/Bank.dart';
+import 'package:garments/pages/accounts/Bank.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/home/BalajiGarments.dart';
 

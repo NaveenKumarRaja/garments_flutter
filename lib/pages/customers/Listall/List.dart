@@ -6,9 +6,6 @@ import 'package:garments/pages/customers/create/Create.dart';
 import 'package:garments/pages/home/BalajiGarments.dart';
 import 'package:garments/pages/home/Drawer.dart';
 
-import 'Card.dart';
-import 'Search.dart';
-
 class CustomerHomeWidget extends StatelessWidget {
   CustomerHomeWidget({Key key}) : super(key: key);
   final TextEditingController searchbox = TextEditingController();

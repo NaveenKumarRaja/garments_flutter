@@ -46,11 +46,36 @@ class _ItemsPageState extends State<ItemsPage> {
               trailing: IconButton(
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  deleteItems(allItems[index]);
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new ItemsHome()));
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          return AlertDialog(
+                            title:
+                                Text("would you like to delete the customer"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("No"),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  deleteItems(allItems[index]);
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              new ItemsHome()));
+                                },
+                                child: Text("Yes"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
               ),
             ));

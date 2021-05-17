@@ -1,4 +1,4 @@
-import 'package:garments/pages/customers/modal/Service.dart';
+import 'package:garments/pages/customers/model/Service.dart';
 import 'package:gsheets/gsheets.dart';
 import 'dart:async';
 
@@ -17,7 +17,7 @@ const _credentials = r'''
 }
     ''';
 
-class FormController {
+class CustomerService {
   final GSheets gsheets = GSheets(_credentials);
 
   Spreadsheet spreadSheet;
@@ -29,7 +29,7 @@ class FormController {
     sheet ??= await spreadSheet.worksheetByTitle('Customers');
   }
 
-  void submitForm(CustomersForm customersForm) async {
+  void submitForm(Customer customersForm) async {
     await init();
     await sheet.values.map
         .appendRow(customersForm.toGsheets())
@@ -37,31 +37,31 @@ class FormController {
         .catchError((e) => {});
   }
 
-  Future<List<CustomersForm>> getCustomersList() async {
+  Future<List<Customer>> getCustomersList() async {
     await init();
     return await sheet.values.allRows(fromRow: 2).then((response) {
-      List<CustomersForm> customers = response
-          .map((listOfstr) => new CustomersForm(
+      List<Customer> customers = response
+          .map((listOfstr) => new Customer(
               listOfstr[0],
               listOfstr[1],
               listOfstr[2],
               listOfstr[3],
               listOfstr[4],
-              CustomersForm.parseIsDeleted(listOfstr[5])))
+              Customer.parseIsDeleted(listOfstr[5])))
           .where((customer) => !customer.isDeleted)
           .toList();
       return Future.value(customers);
     });
   }
 
-  void updateForm(CustomersForm customersForm) async {
+  void updateForm(Customer customersForm) async {
     await init();
     await sheet.values
         .insertRowByKey(customersForm.name, customersForm.toGsheetsList(false))
         .then((response) => print("Response : " + response.toString()));
   }
 
-  void deleteCustomer(CustomersForm customersForm) async {
+  void deleteCustomer(Customer customersForm) async {
     await init();
 
     await sheet.values

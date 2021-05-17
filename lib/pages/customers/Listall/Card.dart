@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/detail/customer/Details.dart';
+import 'package:garments/pages/customers/model/Service.dart';
+import 'package:garments/pages/customers/detail/customer/Details.dart';
 
 class CardWidget extends StatefulWidget {
-  final List<CustomersForm> customer;
+  final List<Customer> customer;
   const CardWidget({Key key, @required this.customer}) : super(key: key);
 
   @override
@@ -15,15 +15,15 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  List<CustomersForm> allCustomers = List<CustomersForm>();
+  List<Customer> allCustomers = List<Customer>();
   var refresh = GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
-    allCustomers = List<CustomersForm>();
+    allCustomers = List<Customer>();
     super.initState();
 
-    FormController().getCustomersList().then((customers) {
+    CustomerService().getCustomersList().then((customers) {
       print("customers :" + customers.toString());
       setState(() {
         this.allCustomers = customers;
@@ -31,9 +31,9 @@ class _CardWidgetState extends State<CardWidget> {
     });
   }
 
-  void deleteCustomer(CustomersForm delete) {
-    FormController formController = FormController();
-    formController.deleteCustomer(delete);
+  void deleteCustomer(Customer delete) {
+    CustomerService customerService = CustomerService();
+    customerService.deleteCustomer(delete);
   }
 
   @override

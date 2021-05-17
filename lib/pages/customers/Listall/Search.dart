@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garments/pages/customers/Listall/List.dart';
+import 'package:garments/pages/customers/listall/List.dart';
 
 class SearchWidget extends StatefulWidget {
   SearchWidget({Key key}) : super(key: key);

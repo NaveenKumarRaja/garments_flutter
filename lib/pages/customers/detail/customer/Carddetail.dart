@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customers/edit/Edit.dart';
 
-import 'package:garments/pages/customers/modal/Service.dart';
-import 'package:garments/pages/detail/customer/Details.dart';
+import 'package:garments/pages/customers/model/Service.dart';
+import 'package:garments/pages/customers/detail/customer/Details.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
@@ -14,11 +15,11 @@ class _CardDetailState extends State<CardDetail> {
   var refresh = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
-    final CustomersForm customer = ModalRoute.of(context).settings.arguments;
+    final Customer customer = ModalRoute.of(context).settings.arguments;
 
     return Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        height: 220,
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        height: 230,
         width: double.maxFinite,
         child: new RefreshIndicator(
           key: refresh,
@@ -34,29 +35,36 @@ class _CardDetailState extends State<CardDetail> {
                     child: Column(
                       children: <Widget>[
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              customer.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                            ),
+                          ],
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                        ),
+                        Row(
                           children: <Widget>[
                             IconButton(
                               icon: Icon(Icons.phone,
                                   size: 18, color: Colors.blue),
                               onPressed: () {},
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
                             Text(
                               customer.phoneNumber,
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.normal),
                             ),
                             Text(
-                              " ,  ",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              "  ,  ",
+                              style: TextStyle(fontSize: 20),
                             ),
                             Text(
                               customer.phoneNo,
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.normal),
                             ),
                           ],
                         ),
@@ -102,6 +110,12 @@ class _CardDetailState extends State<CardDetail> {
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.normal),
                             )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(icon: Icon(Icons.edit), onPressed: () {})
                           ],
                         )
                       ],

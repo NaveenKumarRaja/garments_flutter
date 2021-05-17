@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/api/GSheet.dart';
-import 'package:garments/pages/customers/modal/Service.dart';
+import 'package:garments/pages/customers/model/Service.dart';
 
 class FormsWidget extends StatefulWidget {
   FormsWidget({Key key}) : super(key: key);
@@ -23,11 +23,11 @@ class _FormsWidgetState extends State<FormsWidget> {
 
   void _submitForm() {
     {
-      CustomersForm addCustomers = CustomersForm(name.text, phoneNumber.text,
+      Customer addCustomers = Customer(name.text, phoneNumber.text,
           phoneNo.text, address.text, city.text, false);
-      FormController formController = FormController();
+      CustomerService customerService = CustomerService();
       _showSnackBar("Submiting Customer");
-      formController.submitForm(addCustomers);
+      customerService.submitForm(addCustomers);
     }
   }
 
