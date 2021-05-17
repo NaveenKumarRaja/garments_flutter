@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:garments/pages/customers/edit/Edit.dart';
-
 import 'package:garments/pages/customers/model/Service.dart';
 import 'package:garments/pages/customers/detail/customer/Details.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
@@ -13,13 +13,14 @@ class CardDetail extends StatefulWidget {
 
 class _CardDetailState extends State<CardDetail> {
   var refresh = GlobalKey<RefreshIndicatorState>();
+
   @override
   Widget build(BuildContext context) {
     final Customer customer = ModalRoute.of(context).settings.arguments;
 
     return Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        height: 230,
+        height: 250,
         width: double.maxFinite,
         child: new RefreshIndicator(
           key: refresh,
@@ -40,7 +41,7 @@ class _CardDetailState extends State<CardDetail> {
                             Text(
                               customer.name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                                  fontWeight: FontWeight.bold, fontSize: 25),
                             ),
                           ],
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -50,7 +51,63 @@ class _CardDetailState extends State<CardDetail> {
                             IconButton(
                               icon: Icon(Icons.phone,
                                   size: 18, color: Colors.blue),
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return StatefulBuilder(
+                                      builder: (context, setState) {
+                                        return AlertDialog(
+                                          title: Text("Call"),
+                                          actions: <Widget>[
+                                            Align(
+                                              alignment: Alignment.center,
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                FlatButton(
+                                                  onPressed: () async {
+                                                    var call1 =
+                                                        'call:${customer.phoneNumber}';
+                                                    if (await canLaunch(
+                                                        call1)) {
+                                                      await launch(call1);
+                                                    } else {
+                                                      throw 'Could not launch $call1';
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    customer.phoneNumber,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () async {
+                                                    var call2 =
+                                                        'call:${customer.phoneNo}';
+                                                    if (await canLaunch(
+                                                        call2)) {
+                                                      await launch(call2);
+                                                    } else {
+                                                      throw 'Could not launch $call2';
+                                                    }
+                                                  },
+                                                  child: Text(customer.phoneNo),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
                             ),
                             Text(
                               customer.phoneNumber,
