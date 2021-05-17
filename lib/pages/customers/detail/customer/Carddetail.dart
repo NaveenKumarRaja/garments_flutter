@@ -3,6 +3,7 @@ import 'package:garments/pages/customers/edit/Edit.dart';
 import 'package:garments/pages/customers/model/Service.dart';
 import 'package:garments/pages/customers/detail/customer/Details.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetail({Key key}) : super(key: key);
@@ -69,13 +70,12 @@ class _CardDetailState extends State<CardDetail> {
                                               children: [
                                                 FlatButton(
                                                   onPressed: () async {
-                                                    var call1 =
-                                                        'call:${customer.phoneNumber}';
-                                                    if (await canLaunch(
-                                                        call1)) {
-                                                      await launch(call1);
+                                                    var url =
+                                                        'tel:${customer.phoneNumber}';
+                                                    if (await canLaunch(url)) {
+                                                      await launch(url);
                                                     } else {
-                                                      throw 'Could not launch $call1';
+                                                      throw 'Could not launch $url';
                                                     }
                                                   },
                                                   child: Text(
@@ -88,13 +88,12 @@ class _CardDetailState extends State<CardDetail> {
                                                 ),
                                                 FlatButton(
                                                   onPressed: () async {
-                                                    var call2 =
-                                                        'call:${customer.phoneNo}';
-                                                    if (await canLaunch(
-                                                        call2)) {
-                                                      await launch(call2);
+                                                    var url =
+                                                        'tel:${customer.phoneNo}';
+                                                    if (await canLaunch(url)) {
+                                                      await launch(url);
                                                     } else {
-                                                      throw 'Could not launch $call2';
+                                                      throw 'Could not launch $url';
                                                     }
                                                   },
                                                   child: Text(customer.phoneNo),

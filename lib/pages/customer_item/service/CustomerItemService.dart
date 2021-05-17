@@ -54,7 +54,6 @@ class CustomerItemSerivce {
           .where((element) =>
               customerName.toLowerCase() == element.customerName.toLowerCase())
           .toList();
-      print('CustomeItem from sheet : ' + customerItems.length.toString());
       return Future.value(customerItems);
     });
   }
