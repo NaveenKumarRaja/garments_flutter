@@ -43,8 +43,12 @@ class _DetailsPageState extends State<DetailsPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context,
-              new MaterialPageRoute(builder: (context) => new ItemRate()));
+          Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (context) => ItemRate(),
+                settings: RouteSettings(arguments: customer),
+              ));
         },
       ),
     );
