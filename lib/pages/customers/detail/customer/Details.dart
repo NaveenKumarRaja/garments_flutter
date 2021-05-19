@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garments/pages/customer_item/widgets/ItemRate.dart';
 import 'package:garments/pages/customers/Listall/List.dart';
 import 'package:garments/pages/customers/detail/Tabbar.dart';
 import 'package:garments/pages/customers/model/Service.dart';
@@ -41,7 +42,10 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              new MaterialPageRoute(builder: (context) => new ItemRate()));
+        },
       ),
     );
   }

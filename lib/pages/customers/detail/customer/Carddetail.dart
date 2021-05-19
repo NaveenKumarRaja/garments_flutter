@@ -171,7 +171,17 @@ class _CardDetailState extends State<CardDetail> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            IconButton(icon: Icon(Icons.edit), onPressed: () {})
+                            IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                        builder: (context) => new EditDetails(),
+                                        settings:
+                                            RouteSettings(arguments: customer),
+                                      ));
+                                })
                           ],
                         )
                       ],
